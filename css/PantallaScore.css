@@ -1,0 +1,68 @@
+body{
+    background: url(../IMG/forestFondo.jpg) center fixed;
+    background-size: cover;
+}
+
+html{
+    color: #fff;
+}
+
+h1{
+    font-family: 'Grandstander', cursive;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 680px;
+}
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 3px solid #336c32;
+    font-family: 'Grandstander', cursive;
+    background-color: #4eaa4c;
+    text-align:center;
+  }
+  th, td {
+    padding: 20px;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #8bc9e6;
+  }
+
+.tablita{
+    position: absolute;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 140px;
+    margin-left: 620px;
+}
+
+/*Boton Regresar*/
+.botonRegresar{
+    background-image: url('../IMG/botonVolver.png');
+    background-repeat:no-repeat;
+    height:90px;
+    width:90px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 600px;
+    margin-left: 1400px;
+    position: absolute;
+}
+
+#btn_Regresar{
+    height:90px;
+    width:90px;
+    border: none;
+    background: none;
+}
+
+.botonRegresar:hover,#btn_Regresar:hover{
+    height:100px;
+    width:100px;
+}

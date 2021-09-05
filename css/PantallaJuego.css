@@ -1,0 +1,117 @@
+body{
+    background: url(../IMG/forestFondo.jpg) center fixed;
+    background-size: cover;
+}
+
+.arena{
+    position: absolute;
+    align-items: center;
+    background-position:center;
+    margin: 0 auto;
+    margin-left: 400px;
+    margin-top: 50px;
+}
+
+/*Boton Play*/
+.botonPlay{
+    background-image: url('../IMG/botonPlay.png');
+    background-repeat:no-repeat;
+    height:90px;
+    width:90px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 200px;
+    margin-right: 1400px;
+    position: absolute;
+}
+
+#btn_play{
+    height:90px;
+    width:90px;
+    border: none;
+    background: none;
+}
+
+.botonPlay:hover,#btn_play:hover{
+    height:100px;
+    width:100px;
+}
+
+/*Boton Pausa*/
+.botonPausa{
+    background-image: url('../IMG/botonPausa.png');
+    background-repeat:no-repeat;
+    height:90px;
+    width:90px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 300px;
+    margin-right: 1400px;
+    position: absolute;
+}
+
+#btn_Pausa{
+    height:90px;
+    width:90px;
+    border: none;
+    background: none;
+}
+
+.botonPausa:hover,#btn_Pausa:hover{
+    height:100px;
+    width:100px;
+}
+
+/*Boton Configuracion*/
+.botonConfig{
+    background-image: url('../IMG/botonTuerca.png');
+    background-repeat:no-repeat;
+    height:90px;
+    width:90px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 400px;
+    margin-right: 1400px;
+    position: absolute;
+}
+
+#btn_Config{
+    height:90px;
+    width:90px;
+    border: none;
+    background: none;
+}
+
+.botonConfig:hover,#btn_Config:hover{
+    height:100px;
+    width:100px;
+}
+
+/*Boton Regresar*/
+.botonRegresar{
+    background-image: url('../IMG/botonVolver.png');
+    background-repeat:no-repeat;
+    height:90px;
+    width:90px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 500px;
+    margin-right: 1400px;
+    position: absolute;
+}
+
+#btn_Regresar{
+    height:90px;
+    width:90px;
+    border: none;
+    background: none;
+}
+
+.botonRegresar:hover,#btn_Regresar:hover{
+    height:100px;
+    width:100px;
+}

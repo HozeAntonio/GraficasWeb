@@ -1,0 +1,194 @@
+body{
+    background: url(../IMG/forestFondo.jpg) center fixed;
+    background-size: cover;
+}
+
+#contenedor{
+    float: right;
+}
+
+.banner_img{
+    float: right;
+    animation: movimiento 2.5s linear infinite;
+}
+
+.banner_img img{
+    width: 500px;
+    height: 142px;
+    display: block;
+
+}
+
+@keyframes movimiento{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(30px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+.titulo{
+    align-items: center;
+    position: absolute;
+    margin-left: 500px;
+    margin-top: 50px;
+}
+
+.boton1{
+    background-image: url('../IMG/botonJugar.png');
+    background-repeat:no-repeat;
+    height:120px;
+    width:230px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 240px;
+    margin-left: 630px;
+    position: absolute;
+}
+
+#btn_Jugar{
+    height:120px;
+    width:230px;
+    border: none;
+    background: none;
+}
+
+.boton1:hover,#btn_Jugar:hover{
+    height:140px;
+    width:250px;
+}
+
+/*Boton 2*/
+.boton2{
+    background-image: url('../IMG/botonMulti.png');
+    background-repeat:no-repeat;
+    height:120px;
+    width:230px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 380px;
+    margin-left: 630px;
+    position: absolute;
+}
+
+#btn_Multi{
+    height:120px;
+    width:230px;
+    border: none;
+    background: none;
+}
+
+.boton2:hover,#btn_Multi:hover{
+    height:140px;
+    width:250px;
+}
+
+/*Boton 3*/
+.boton3{
+    background-image: url('../IMG/botonSalir.png');
+    background-repeat:no-repeat;
+    height:120px;
+    width:230px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 520px;
+    margin-left: 630px;
+    position: absolute;
+}
+
+#btn_Salir{
+    height:120px;
+    width:230px;
+    border: none;
+    background: none;
+}
+
+.boton3:hover,#btn_Salir:hover{
+    height:140px;
+    width:250px;
+}
+
+/*Boton Trofeo*/
+.botonTrofeo{
+    background-image: url('../IMG/botonTrofeo.png');
+    background-repeat:no-repeat;
+    height:90px;
+    width:90px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 400px;
+    margin-left: 1400px;
+    position: absolute;
+}
+
+#btn_Trofeo{
+    height:90px;
+    width:90px;
+    border: none;
+    background: none;
+}
+
+.botonTrofeo:hover,#btn_Trofeo:hover{
+    height:100px;
+    width:100px;
+}
+
+/*Boton Configuracion*/
+.botonConfig{
+    background-image: url('../IMG/botonTuerca.png');
+    background-repeat:no-repeat;
+    height:90px;
+    width:90px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 500px;
+    margin-left: 1400px;
+    position: absolute;
+}
+
+#btn_Config{
+    height:90px;
+    width:90px;
+    border: none;
+    background: none;
+}
+
+.botonConfig:hover,#btn_Config:hover{
+    height:100px;
+    width:100px;
+}
+
+/*Boton Inicio Sesion*/
+.botonIniciar{
+    background-image: url('../IMG/botonIngresar.png');
+    background-repeat:no-repeat;
+    height:90px;
+    width:90px;
+    background-size: 100% 100%;
+    background-position:center;
+    margin: 0 auto;
+    margin-top: 600px;
+    margin-left: 1400px;
+    position: absolute;
+}
+
+#btn_Iniciar{
+    height:90px;
+    width:90px;
+    border: none;
+    background: none;
+}
+
+.botonIniciar:hover,#btn_Iniciar:hover{
+    height:100px;
+    width:100px;
+}
