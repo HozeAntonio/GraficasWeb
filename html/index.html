@@ -1,31 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-	<meta charset="utf-8">
-	<title>Configuración</title>
-	<link rel="stylesheet" type="text/css" href="estilos.css">
-	<link href="https://fonts.googleapis.com/css2?family=Tourney:wght@100;400&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Snake Game</title>
+    <link href="/css/PantallaPrincipal.css" rel="stylesheet">
 </head>
+
 <body>
-<center>
-	<h1>AJUSTES</h1>
-	<h2>Sonido</h2> 
-	<h3>Nivel</h3>
-	<div class="slideContainer">
-		<img src="mute2.png" height="35">
-		<input type="range" min="1" max="100" value="1" id="barra1" class="Barra">
-		<img src="Volumen.png" height="35">
-		<p>Value: <spam id="value"></p>
-	</div>
-	<h3>Música</h3>
-	<div class="slideContainer">
-		<img src="mute2.png" height="35">
-		<input type="range" min="1" max="100" value="2" id="barra2" class="Barra">
-		<img src="Volumen.png" height="35">
-		<p>Value: <spam id="value2"></p>
-	</div>
-	<button>Atrás</button>
-</center>
+    <div id="contenedor" class="titulo">
+        <div class="banner_img">
+            <img src="/img/logo.png" alt="" width="500" height="142">
+        </div>
+    </div>
+
+    <div class="boton1">
+        <button id="btn_Jugar" onclick="location.href='forma.html'"></button>
+    </div>
+
+    <div class="boton2">
+        <button id="btn_Multi" onclick="location.href='forma.html'"></button>
+    </div>
+
+    <div class="boton3">
+        <button id="btn_Salir"></button>
+    </div>
+
+    <div class="botonTrofeo">
+        <button id="btn_Trofeo" onclick="location.href='score.html'"></button>
+    </div>
+
+    <div class="botonConfig">
+        <button id="btn_Config" onclick="location.href='index.html'"></button>
+    </div>
+
+    <div class="botonIniciar">
+        <button id="btn_Iniciar" onclick="location.href='sign-in.html'"></button>
+    </div>
 </body>
-<script src="main.js"></script>
+
 </html>

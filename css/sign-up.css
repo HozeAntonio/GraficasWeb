@@ -1,0 +1,57 @@
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: url(/img/forestFondo.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.contenedor {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    font-family: 'Grandstander', cursive;
+    align-items: center;
+}
+
+.contenedor .logo {
+    width: 100%;
+}
+
+.contenedor .registro-form {
+    width: 600px;
+}
+
+.contenedor .registro-form .form-box {
+    width: 300px;
+    margin: 0 180px;
+}
+
+.contenedor .registro-form .form-box .label-sign-in {
+    padding: 5px;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.contenedor .registro-form .form-box .input-sign-in {
+    margin: 10px;
+    border-radius: 15px;
+    outline: none;
+    width: 200px;
+}
+
+.contenedor .registro-form .label-registro {
+    padding: 5px;
+    font-size: 15px;
+    margin-top: 180px;
+    margin: 180px;
+}
+
+.contenedor .registro-form .form-control {
+    margin: 50px;
+    width: 120px;
+    height: 40px;
+}
