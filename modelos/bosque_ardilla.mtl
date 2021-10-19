@@ -1,0 +1,10 @@
+newmtl __1:_Squirrel
+illum 4
+Ka 0.5882 0.5882 0.5882
+Kd 0.5882 0.5882 0.5882
+Tf 1.00 1.00 1.00
+map_Kd 10051_Squirrel_v2_Diffuse.jpg
+map_Ka 10051_Squirrel_v2_Diffuse.jpg
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00

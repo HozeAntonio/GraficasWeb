@@ -1,0 +1,68 @@
+
+ function setupScene() {
+
+            clock = new THREE.Clock();
+            scene = new THREE.Scene();
+            createCamera();
+
+
+            var ambientLight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), 1.0);
+            scene.add(ambientLight);
+
+            var directionalLight = new THREE.DirectionalLight(new THREE.Color(1, 1, 0), 0.4);
+            directionalLight.position.set(0, 0, 1);
+            scene.add(directionalLight);
+
+            var grid = new THREE.GridHelper(50, 10, 0xffffff, 0xffffff);
+            grid.position.y = -1;
+            scene.add(grid);
+
+            var material = new THREE.MeshLambertMaterial({
+                color: new THREE.Color(0.5, 0.0, 0.0)
+            });
+            var geometry = new THREE.BoxGeometry(1, 1, 1);
+
+            var player1 = new THREE.Mesh(geometry, material);
+            player1.position.x = 1;
+            var player2 = player1.clone();
+            player2.material = new THREE.MeshLambertMaterial({
+                color: new THREE.Color(0.0, 1.0, 0.0)
+            });
+            player2.position.x = -1;
+            var snake = new Snake(geometry, material);
+            snake = new THREE.Mesh(snake.geometry, snake.geometry);
+
+            snake.position.x = 3;
+            scene.add(snake);
+            scene.add(player2);
+            scene.add(player1)
+
+            players.push(player1);
+            players.push(player2);
+
+            player1.yaw = 0;
+            player1.forward = 0;
+
+            player2.yaw = 0;
+            player2.forward = 0;
+
+            // 2 Vemos como hacer una camara en 3era persona
+            //camera.position.y = 1;
+            //cube.add(camera);
+
+            $("#scene-section-1").append(renderers[0].domElement);
+
+        }
+
+  function createCamera() {
+            var camera = new THREE.PerspectiveCamera(75, visibleSize.width / visibleSize.height, 0.1, 100);
+            camera.position.x = 0;
+            camera.position.y = 30;
+            camera.position.z = 0;
+            camera.lookAt({
+                x: 0,
+                y: 0,
+                z: 0
+            });
+
+        }
