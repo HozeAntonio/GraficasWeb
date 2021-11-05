@@ -23,7 +23,7 @@
         var controls;
         var objects = [];
         var clock;
-        var deltaTime;
+        var deltatime;
         var keys = {};
         var cube;
         var speed = 50;
@@ -38,6 +38,7 @@
         var direction3 = new THREE.Vector3(0, 0, 1);
         var direccionesRender = [50];
         var anim = [];
+        var RESOURCES_LOADED = false;
         $(document).ready(function() {
             setupScene();
             document.addEventListener('keydown', onKeyDown);
@@ -147,7 +148,7 @@
 
         function render() {
             requestAnimationFrame(render);
-            deltaTime = clock.getDelta();
+            deltatime = clock.getDelta();
             var velocidad = 5;
 
 
@@ -155,10 +156,10 @@
             direction2 = direccionesJugador2.length > 0 ? direccionesJugador2.pop(0) : direction2;
             if (!paraElCarroMaster(players[0].position.x, players[0].position.z)) {
 
-                players[0].translateX(direction.x * deltaTime * velocidad);
-                players[0].translateZ(direction.z * deltaTime * velocidad);
-                players[1].translateX(direction.x * deltaTime * velocidad);
-                players[1].translateZ(direction.z * deltaTime * velocidad);
+                players[0].translateX(direction.x * deltatime * velocidad);
+                players[0].translateZ(direction.z * deltatime * velocidad);
+                players[1].translateX(direction.x * deltatime * velocidad);
+                players[1].translateZ(direction.z * deltatime * velocidad);
             }
             //Movimiento izq hacia arriba o abajo 2 es abajo, 3 es arriba
 
@@ -210,12 +211,12 @@
                 direccionesRender[5] = 0;
             }
 
-            // ciudadAnimacion();
+            ciudadAnimacion();
 
             // 1 Vemos la rotacion de la camara y movimiento
             // 2 Vemos como hacer una camara en 3era persona		
-            //cube.rotation.y += yaw * deltaTime;
-            //cube.translateZ(forward * deltaTime);
+            //cube.rotation.y += yaw * deltatime;
+            //cube.translateZ(forward * deltatime);
 
             // 3 Vemos como hacer un lookAt con la camara
             //camera.lookAt(cube.position);
@@ -262,8 +263,8 @@
             });
             player2.position.x = -1;
 
-            // ciudad();
-            bosque();
+             ciudad();
+            // bosque();
             // playa();
             players.push(player1);
             players.push(player2);

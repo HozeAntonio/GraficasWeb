@@ -30,6 +30,7 @@ function ciudad() {
             anim.push(carroDerecha2);
             scene.add(carroDerecha3);
             anim.push(carroDerecha3);
+            RESOURCES_LOADED=true;
         }
     );
 
