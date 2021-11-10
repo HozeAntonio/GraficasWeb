@@ -3,7 +3,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-image: url(/img/forestFondo.jpg);
+    background: url(../img/kk.png) center fixed;
     background-size: 100%;
     font-family: 'Grandstander', cursive;
     background-repeat: no-repeat;

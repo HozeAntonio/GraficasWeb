@@ -2,7 +2,7 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
-    background: url(/img/forestFondo.jpg);
+    background: url(../img/kk.png) center fixed;
     background-size: 100%;
     background-repeat: no-repeat;
 }

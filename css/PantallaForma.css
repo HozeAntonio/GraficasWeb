@@ -1,5 +1,5 @@
 body{
-    background: url(../IMG/forestFondo.jpg) center fixed;
+    background: url(../img/kk.png) center fixed;
     background-size: cover;
 }
 
@@ -41,7 +41,7 @@ h1{
 
 /*Boton Reloj*/
 .botonReloj{
-    background-image: url('../IMG/botonMulti.png');
+    background-image: url('../IMG/botonContra.png');
     background-repeat:no-repeat;
     height:120px;
     width:230px;
