@@ -14,10 +14,15 @@ function playa() {
             tabla2.rotation.set(THREE.Math.degToRad(90), THREE.Math.degToRad(180), THREE.Math.degToRad(0));
             tabla3.position.set(-90, 0, -40);
             tabla4.position.set(-60, 0, 40);
+            anim.push(surf);
+          
+            anim.push(tabla3);
+            anim.push(tabla4);
             scene.add(surf);
             scene.add(tabla2);
             scene.add(tabla3);
             scene.add(tabla4);
+            RESOURCES_LOADED=true;
         }
     );
     loadOBJWithMTL(

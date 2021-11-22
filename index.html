@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Snake Game</title>
+    <link href="css/PantallaPrincipal.css" rel="stylesheet">
+</head>
+
+<body>
+    <audio id="musiquita" autoplay loop>
+        <source src="musicaSnake.mp3" type="audio/mp3">
+    </audio>
+    <div id="contenedor" class="titulo">
+        <div class="banner_img">
+            <img src="img/logo.png" alt="" width="500" height="142">
+        </div>
+    </div>
+
+    <div class="boton1">
+       <a href="forma.html"><button id="btn_Jugar" onclick="singlePlayer()"></button></a> 
+    </div>
+
+    <div class="boton2">
+      <a href="forma.html"> <button id="btn_Multi" onclick="multijugador()"></button></a> 
+    </div>
+
+    <div class="boton3">
+        <button id="btn_Salir"></button>
+    </div>
+
+    <div class="botonTrofeo">
+        <button id="btn_Trofeo" onclick="location.href='score.html'"></button>
+    </div>
+
+    <div class="botonConfig">
+        <button id="btn_Config" onclick="location.href='ajustes.html'"></button>
+    </div>
+
+    <div class="botonIniciar">
+        <button id="btn_Iniciar" onclick="location.href='sign-in.html'"></button>
+    </div>
+
+    <script>
+        function singlePlayer(){
+            localStorage.removeItem('numeroJugadores');
+            localStorage.setItem('numeroJugadores', '1');
+        }
+        function multijugador(){
+            localStorage.removeItem('numeroJugadores');
+            localStorage.setItem('numeroJugadores', '2');
+        }
+
+    </script>
+</body>
+
+</html>

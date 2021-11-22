@@ -28,14 +28,12 @@ function bosque() {
 
             grupoAbajo.rotation.y = THREE.Math.degToRad(90);
             grupoArriba.rotation.y = THREE.Math.degToRad(90);
-            // var edificioSmol = edificio.clone();
-            // edificioSmol.rotation.set(0, THREE.Math.degToRad(-180), 0);
-            // edificioSmol.position.set(80, 0, -40);
+        
             scene.add(tronco);
             scene.add(grupoIzq);
             scene.add(grupoAbajo);
             scene.add(grupoArriba);
-            // scene.add(edificioSmol);
+            
         }
     );
 
@@ -58,14 +56,16 @@ function bosque() {
             ardillaLatIzquierdaArriba.rotation.set(0, THREE.Math.degToRad(45), 0);
             ardillaLatIzquierda.rotation.set(0, THREE.Math.degToRad(135), 0);
 
-            // var edificioSmol = edificio.clone();
-            // edificioSmol.rotation.set(0, THREE.Math.degToRad(-180), 0);
-            // edificioSmol.position.set(80, 0, -40);
             scene.add(ardilla);
             scene.add(ardillaLatDerecha);
             scene.add(ardillaLatIzquierdaArriba);
             scene.add(ardillaLatIzquierda);
-            // scene.add(edificioSmol);
+            anim.push(ardilla);
+            anim.push(ardillaLatDerecha);
+            anim.push(ardillaLatIzquierdaArriba);
+            anim.push(ardillaLatIzquierda);
+            
+            RESOURCES_LOADED=true;
         }
     );
 }

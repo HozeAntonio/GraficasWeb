@@ -1,0 +1,498 @@
+<html>
+
+<head>
+    <!--
+		1.- Movimiento y rotacion de la camara
+		2.- Camara en 3era persona agregandola como hija del cubo
+		3.- Camara con un lookAt hacia el cubo
+	-->
+    <title>2.1 Movimiento de camara</title>
+    <script type="text/javascript" src="jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.110.0/build/three.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.110.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.110.0/examples/js/loaders/MTLLoader.js"></script>
+    <script type="text/javascript" src="js/ciudad.js"></script>
+    <script type="text/javascript" src="js/bosque.js"></script>
+    <script type="text/javascript" src="js/playa.js"></script>
+    <script type="text/javascript" src="js/ciudadAnimacion.js"></script>
+    <script type="text/javascript" src="js/playaAnimacion.js"></script>
+    <script type="text/javascript" src="js/bosqueAnimacion.js"></script>
+    <script type="text/javascript" src="js/explodeAnimation.js"></script>
+    <script type="text/javascript" src="js/funciones.js"></script>
+    <script type="text/javascript">
+        var scene;
+        var camera;
+        var renderer;
+        var controls;
+        var objects = [];
+        var dirs = [];
+        var objectSize = 1;
+        var colors = [0xff0fff, 0xccff00, 0xff000f, 0x996600, 0xffffff];
+        var clock;
+        var deltatime;
+        var movementSpeed = 5;
+        var keys = {};
+        var cube;
+        var speed = 50;
+        var laFruta = [];
+        var parts = [];
+        var totalObjects = 50;
+        var cuadranteAbajo = true,
+            cuadranteAbajoIzq = false,
+            cuadranteArribaDer = false,
+            inicio = false;
+        var direccionesJugador = [],
+            direccionesJugador2 = [],
+            ultimaPosJ1 =[],
+            ultimaPosJ2 =[];
+        var direction = new THREE.Vector3(0, 0, 1);
+        var direction2 = new THREE.Vector3(0, 0, 1);
+        var direction3 = new THREE.Vector3(0, 0, 1);
+        var direccionesRender = [50];
+        var anim = [];
+        var frutaCargada =false;
+        var RESOURCES_LOADED = false;
+        var explosion = false;
+        var colaSerpiente =[];
+        var colaSerpiente2 =[]; 
+        var stop =false,
+        pausa =false;
+        var puntajeJugador1 = 0;
+        var puntajeJugador2 = 0;
+        var escenario = localStorage.getItem('escenario');
+        var dificultad = localStorage.getItem('dificultad');
+        var cantidadJugadores = localStorage.getItem('numeroJugadores');
+        console.log(escenario);
+        $(document).ready(function() {
+            setupScene();
+            document.addEventListener('keydown', onKeyDown);
+            document.addEventListener('keyup', onKeyUp);
+
+            render();
+        });
+
+
+        function onKeyDown(event) {
+            keys[String.fromCharCode(event.keyCode)] = true;
+        }
+
+        function onKeyUp(event) {
+            keys[String.fromCharCode(event.keyCode)] = false;
+        }
+
+        var visibleSize = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        }
+
+        function loadOBJWithMTL(path, objFile, mtlFile, onLoadCallback) {
+            var mtlLoader = new THREE.MTLLoader();
+            mtlLoader.setPath(path);
+            mtlLoader.load(mtlFile, (materiales) => {
+                var objLoader = new THREE.OBJLoader();
+                objLoader.setPath(path);
+                objLoader.setMaterials(materiales);
+                objLoader.load(objFile, (objCargado) => {
+                    onLoadCallback(objCargado);
+                });
+            });
+        }
+
+        function randInRange(a, b) {
+        return a + Math.floor((b - a) * Math.random());
+        }
+        function spawnAppleVector() {
+
+            if(dificultad ==1){
+                var x = randInRange(-46, 46),
+                z = randInRange(-46, 46);
+            } else{
+                var x = randInRange(-37, 37),
+                z = randInRange(-37, 37);
+            }
+        
+      
+        return new THREE.Vector3(x, 1, z);
+        }
+
+        var posicionFruta = spawnAppleVector();
+        loadOBJWithMTL("modelos/", "apple.obj", "apple.mtl", (fruta) => {
+          laFruta.push(fruta);
+          fruta.scale.set(1, 1, 1);
+          fruta.position.set(posicionFruta.x,0,posicionFruta.z);
+          scene.add(fruta);
+          frutaCargada=true;
+        });
+
+        document.addEventListener("keydown", function(e) {
+            switch (e.key) {
+                case "ArrowDown":
+                    direccionesJugador.push(new THREE.Vector3(0, 0, 1));
+                    cuadranteAbajo = true;
+                    direccionesRender[2] = 1;
+                    break;
+                case "ArrowUp":
+                    direccionesJugador.push(new THREE.Vector3(0, 0, 1));
+                    cuadranteAbajo = false;
+                    direccionesRender[3] = 1;
+                    break;
+                case "ArrowLeft":
+                    direccionesJugador.push(new THREE.Vector3(0, 0, 1));
+                    if (inicio) {
+                        direccionesRender[0] = 1;
+                    } else {
+                        inicio = false
+                        if (cuadranteAbajo) {
+                            cuadranteAbajoIzq = true;
+                            cuadranteArribaDer = false;
+                            direccionesRender[0] = 1;
+                        } else {
+                            cuadranteAbajoIzq = false;
+                            cuadranteArribaDer = false;
+                            direccionesRender[0] = 1;
+                        }
+                    }
+                    break;
+                case "ArrowRight":
+                    direccionesJugador.push(new THREE.Vector3(0, 0, 1));
+                    if (inicio) {
+                        direccionesRender[1] = 1;
+                    } else {
+                        inicio = false;
+                        if (cuadranteAbajo) {
+                            cuadranteAbajoIzq = false;
+                            cuadranteArribaDer = false;
+                            direccionesRender[1] = 1;
+                        } else {
+                            cuadranteArribaDer = true;
+                            cuadranteAbajoIzq = false;
+                            direccionesRender[1] = 1;
+                        }
+                    }
+                    break;
+
+                case "s":
+                    direccionesJugador2.push(new THREE.Vector3(0, 0, 1));
+                    break;
+                case "w":
+                    direccionesJugador2.push(new THREE.Vector3(0, 0, 1));
+                    break;
+                case "a":
+                    direccionesJugador2.push(new THREE.Vector3(0, 0, 1));
+                    direccionesRender[4] = 1;
+                    break;
+                case "d":
+                    direccionesJugador2.push(new THREE.Vector3(0, 0, 1));
+                    direccionesRender[5] = 1;
+                    break;
+                case "p": setPausa()
+                    break;
+
+            }
+        });;
+        $(".JugadoreLeft").append("<div class='puntaje1'><input class='puntaje' id='puntajejugador1' value=0 style='width: 5  0%; background-color: rgba(239, 184, 16, 0.7); border-radius: 10px' disabled></input></div><br>");
+        $(".JugadorRight").append("<div class='puntaje2'><input class='puntaje' id='puntajejugador2' value=0 style='width: 50%; background-color: rgba(239, 184, 16, 0.7); border-radius: 10px' disabled></input></div><br>");
+                               
+
+        var renderers = [];
+        var cameras = [];
+        var players = [];
+        if (dificultad==1)
+        var velocidad = 6;
+        else
+        var velocidad = 12;
+        function render() {
+            requestAnimationFrame(render);
+            deltatime = clock.getDelta();
+           if(frutaCargada)
+            laFruta[0].rotateY(deltatime);
+            direction = direccionesJugador.length > 0 ? direccionesJugador.pop(0) : direction;
+            direction2 = direccionesJugador2.length > 0 ? direccionesJugador2.pop(0) : direction2;
+         
+            movimiento();
+
+                var pos1 = new THREE.Vector3(
+                players[0].position.x,
+                0,
+                players[0].position.z
+                );
+                var pos2 = new THREE.Vector3(
+                players[0].position.x,
+                0,
+                players[0].position.z
+                );
+
+                ultimaPosJ1.push(pos1);
+                ultimaPosJ2.push(pos2);
+            
+
+            posicionarBombas();
+
+            //Movimiento izq hacia arriba o abajo 2 es abajo, 3 es arriba
+
+            if (cuadranteAbajo) {
+                if (cuadranteAbajoIzq) {
+                    if (direccionesRender[0] == 1) {
+                        players[0].rotateY(THREE.Math.degToRad(-90));
+                        direccionesRender[0] = 0;
+                    } else if (direccionesRender[2] == 1) {
+                        players[0].rotateY(THREE.Math.degToRad(90));
+                        direccionesRender[2] = 0;
+                    }
+                } else {
+                    if (direccionesRender[1] == 1) {
+                        players[0].rotateY(THREE.Math.degToRad(90));
+                        direccionesRender[1] = 0;
+                    } else if (direccionesRender[2] == 1) {
+                        players[0].rotateY(THREE.Math.degToRad(-90));
+                        direccionesRender[2] = 0;
+                    }
+                }
+            } else {
+                if (cuadranteArribaDer) {
+                    if (direccionesRender[1] == 1) {
+                        players[0].rotateY(THREE.Math.degToRad(-90));
+                        direccionesRender[1] = 0;
+                    } else if (direccionesRender[3] == 1) {
+                        players[0].rotateY(THREE.Math.degToRad(90));
+                        direccionesRender[3] = 0;
+                    }
+                } else {
+                    if (direccionesRender[0] == 1) {
+                        players[0].rotateY(THREE.Math.degToRad(90));
+                        direccionesRender[0] = 0;
+                    } else if (direccionesRender[3] == 1) {
+                        players[0].rotateY(THREE.Math.degToRad(-90));
+                        direccionesRender[3] = 0;
+                    }
+                }
+            }
+
+            if (direccionesRender[4] == 1) {
+                players[1].rotateY(THREE.Math.degToRad(-90));
+                direccionesRender[4] = 0;
+            }
+            if (direccionesRender[5] == 1) {
+                players[1].rotateY(THREE.Math.degToRad(90));
+                direccionesRender[5] = 0;
+            }
+            if(frutaCargada){
+
+                colisionFruta();
+            }
+
+            if(!stop)
+                colisionEntrePuntos();
+
+            if(escenario == 1){
+                bosqueAnimacion();
+            }else if(escenario==2){
+                playaAnimacion();
+            }else{
+                ciudadAnimacion();
+            }
+           
+
+            // 1 Vemos la rotacion de la camara y movimiento
+            // 2 Vemos como hacer una camara en 3era persona		
+            //cube.rotation.y += yaw * deltatime;
+            //cube.translateZ(forward * deltatime);
+
+            // 3 Vemos como hacer un lookAt con la camara
+            //camera.lookAt(cube.position);
+            var pCount = parts.length;
+            while (pCount--) {
+            parts[pCount].update();
+            }
+            renderers[0].render(scene, cameras[0]);
+
+
+        }
+
+        function setupScene() {
+
+            clock = new THREE.Clock();
+            scene = new THREE.Scene();
+            var loader = new THREE.TextureLoader();
+            if(escenario == 1){
+                loader.load("img/bosqueMIO.png", function(texture) {
+                scene.background = texture;
+            })
+            }else if(escenario==2){
+                loader.load("img/playa.png", function(texture) {
+                scene.background = texture;
+            })
+            }else{
+                loader.load("img/ciudadMIO.png", function(texture) {
+                scene.background = texture;
+            })
+            }
+            createCamera();
+            createRender(new THREE.Color(0, 0, 0));
+
+            var ambientLight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), 1.0);
+            scene.add(ambientLight);
+
+            var directionalLight = new THREE.DirectionalLight(new THREE.Color(1, 1, 0), 0.4);
+            directionalLight.position.set(0, 1, 0);
+            scene.add(directionalLight);
+
+            if(dificultad==1){
+                var grid = new THREE.GridHelper(100, 10, 0xffffff, 0xffffff);
+            grid.position.y = -1;
+            scene.add(grid);
+            }else{
+                var grid = new THREE.GridHelper(81, 9, 0xffffff, 0xffffff);
+            grid.position.y = -1;
+            scene.add(grid);
+            }
+           
+
+            if(cantidadJugadores==1){
+                var material = new THREE.MeshLambertMaterial({
+                    color: new THREE.Color(0.5, 0.0, 0.0)
+                });
+                var geometry = new THREE.BoxGeometry(1, 1, 1);
+            
+                var player1 = new THREE.Mesh(geometry, material);
+            
+                player1.scale.set(1, 1, 6);
+                var cola = new THREE.Mesh(geometry, material);
+                cola.position.set(100,0,100);
+                colaSerpiente.push(cola);
+                players.push(player1);
+                scene.add(player1)
+            }else{
+                var material = new THREE.MeshLambertMaterial({
+                    color: new THREE.Color(0.5, 0.0, 0.0)
+                });
+                var geometry = new THREE.BoxGeometry(1, 1, 1);
+            
+                var player1 = new THREE.Mesh(geometry, material);
+            
+                player1.scale.set(1, 1, 6);
+                var cola = new THREE.Mesh(geometry, material);
+                cola.position.set(100,0,100);
+            
+            
+                var player2 = player1.clone();
+                player2.material = new THREE.MeshLambertMaterial({
+                    color: new THREE.Color(0.0, 1.0, 0.0)
+                });
+                player2.position.x = -3;
+                var cola2 = cola.clone();
+                cola2.material = new THREE.MeshLambertMaterial({
+                    color: new THREE.Color(0.0, 1.0, 0.0)
+                });
+            
+                colaSerpiente.push(cola);
+            
+                colaSerpiente2.push(cola2);
+                players.push(player1);
+                players.push(player2);
+                scene.add(player2);
+                scene.add(player1)
+            }
+            if(escenario == 1){
+                bosque();
+            }else if(escenario==2){
+                playa();
+            }else{
+                ciudad();
+            }
+        
+            // 2 Vemos como hacer una camara en 3era persona
+            //camera.position.y = 1;
+            //cube.add(camera);
+
+            $("#scene-section-1").append(renderers[0].domElement);
+        }
+
+
+        function createCamera() {
+            var camera = new THREE.PerspectiveCamera(75, visibleSize.width / visibleSize.height, 0.1, 100);
+            camera.position.x = 0;
+            camera.position.y = 80;
+            camera.position.z = 0;
+            camera.rotation.x = THREE.Math.degToRad(-90);
+            cameras.push(camera);
+        }
+
+        function createRender(color) {
+            var renderer = new THREE.WebGLRenderer({
+                precision: "mediump"
+            });
+            renderer.setClearColor(color);
+            renderer.setPixelRatio(visibleSize.width / visibleSize.height);
+            renderer.setSize(visibleSize.width, visibleSize.height);
+            renderers.push(renderer);
+        }
+
+        function paraElCarroMaster(posicionX, posicionZ) {
+           if(dificultad==1){
+            if (posicionZ > 46 || posicionZ < -46) {
+            return true;
+            }
+            if (posicionX > 46 || posicionX < -46) {
+            return true;
+            }
+           }else{
+            if (posicionZ > 37 || posicionZ < -37) {
+            return true;
+            }
+            if (posicionX > 37 || posicionX < -37) {
+            return true;
+            }
+           }
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+
+    <audio id="musiquita" allow="autoplay" autoplay loop>
+        <source src="musicaSnake.mp3" type="audio/mp3">
+    </audio>
+    <button onclick="setPausa()" type="button" class="btn btn-outline-secondary btn-lg"style=" margin:1%;" id="upgradeMaestro" data-toggle="modal" data-target="#exampleModal">Pausa</button>
+             
+    <div style="display: flex; height: 100px;">
+
+        <div style="width: 100%;" id="scene-section-1">
+        
+           
+              <div class="JugadoreLeft">
+            </div>
+            <div class="JugadorRight">
+            
+            </div>
+    
+        </div>
+
+    </div>
+
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div style="background-image: url(img/logo.png);  background-size: cover; background-repeat:   no-repeat;  background-position: center center;     " class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Juego en pausa</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+          Haz click en reanudar para continuar
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" onclick="setPausa()" data-dismiss="modal">Reanudar</button>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/signIn.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tourney:wght@100;400&display=swap" rel="stylesheet">
+    <title>The Snake Game</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="log-form">
+            <img class="logo" src="img/logo.png" alt="">
+            <form action="index.html" class="form-box">
+                <label class="label-sign-in" for="nombreUsuario">Nombre de usuario</label>
+                <br>
+                <input id="nombreUsuario" class="input-sign-in" type="text" name="nombreUsuario">
+                <br>
+                <input class="form-control" type="submit" onclick="nombrePlayer()" value="Iniciar sesión" name="">
+            </form>
+           
+        </div>
+    </div>
+
+    <script>
+        function nombrePlayer(){
+        localStorage.removeItem('jugador')
+        var nombreUsuario = document.getElementById("nombreUsuario").value;
+        localStorage.setItem('jugador',nombreUsuario);
+        }
+    </script>
+</body>
+
+</html>

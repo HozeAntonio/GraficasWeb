@@ -41,7 +41,7 @@ h1{
 
 /*Boton Reloj*/
 .botonReloj{
-    background-image: url('../IMG/botonContra.png');
+    background-image: url('../img/botonHARDCORE.png');
     background-repeat:no-repeat;
     height:120px;
     width:230px;
@@ -67,7 +67,7 @@ h1{
 
 /*Boton Configuracion*/
 .botonConfig{
-    background-image: url('../IMG/botonTuerca.png');
+    background-image: url('../img/botonTuerca.png');
     background-repeat:no-repeat;
     height:90px;
     width:90px;
@@ -93,7 +93,7 @@ h1{
 
 /*Boton Regresar*/
 .botonRegresar{
-    background-image: url('../IMG/botonVolver.png');
+    background-image: url('../img/botonVolver.png');
     background-repeat:no-repeat;
     height:90px;
     width:90px;

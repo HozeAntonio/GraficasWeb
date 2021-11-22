@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Snake Game</title>
+    <link href="css/PantallaEsc.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tourney:wght@100;400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>¡Elige un escenario!</h1>
+
+    <div class="Esc1">
+        <a href="multijugador.html"><button onclick="seleccionBosque()" id="btn_bosque" ></button></a>
+    </div>
+
+    <div class="Esc2">
+        <a href="multijugador.html"> <button onclick="seleccionPlaya()" id="btn_playa"></button></a>
+    </div>
+
+    <div class="Esc3">
+        <a href="multijugador.html"><button onclick="seleccionCiudad()" id="btn_ciudad"></button></a>
+    </div>
+
+    <div class="botonConfig">
+        <a href="ajustes.html"><button id="btn_Config"></button></a>
+    </div>
+
+    <div class="botonRegresar">
+        <a href="forma.html"><button id="btn_Regresar"></button></a>
+    </div>
+
+<script>
+
+    function seleccionBosque(){
+        //keyname,keyvalue
+        localStorage.removeItem('escenario');
+        localStorage.setItem('escenario', '1');
+    }
+    function seleccionPlaya(){
+        //keyname,keyvalue
+        localStorage.removeItem('escenario');
+        localStorage.setItem('escenario', '2');
+    }
+    function seleccionCiudad(){
+        //keyname,keyvalue
+        localStorage.removeItem('escenario');
+        localStorage.setItem('escenario', '3');
+    }
+</script>
+
+</body>
+
+</html>
