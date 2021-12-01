@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        function direccion(){
+            var random = Math.floor((Math.random() * (100 - 0 + 1)) + 0);
+            console.log(random);
+            
+           if(random < 25){
+               console.log("Arriba");
+               //Arriba
+           }else if(random < 50){
+               console.log("Derecha");
+               //Derecha
+           }else if(random <75){
+            console.log("Abajo");
+               //Abajo
+           }else{
+            console.log("Izquierda");
+               //Izquierda
+           }
+        }
+
+        setInterval(direccion, 2000);
+
+obstaculo();
+    </script>
+    
+</body>
+</html>
