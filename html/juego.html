@@ -141,6 +141,65 @@
             }
         });;
 
+        // Enemigo
+
+        
+
+        function direccion(){
+            var random = Math.floor((Math.random() * (100 - 0 + 1)) + 0);
+           if(random < 25){
+               console.log("Arriba");
+               direccionesJugador2.push(new THREE.Vector3(0, 0, 1));
+                cuadranteAbajo = false;
+                direccionesRender[3] = 1;
+               //Arriba
+           }else if(random < 50){
+               console.log("Derecha");
+               direccionesJugador2.push(new THREE.Vector3(0, 0, 1));
+                    if (inicio) {
+                        direccionesRender[1] = 1;
+                    } else {
+                        inicio = false;
+                        if (cuadranteAbajo) {
+                            cuadranteAbajoIzq = false;
+                            cuadranteArribaDer = false;
+                            direccionesRender[1] = 1;
+                        } else {
+                            cuadranteArribaDer = true;
+                            cuadranteAbajoIzq = false;
+                            direccionesRender[1] = 1;
+                        }
+                    }
+               //Derecha
+           }else if(random <75){
+            console.log("Abajo");
+            direccionesJugador2.push(new THREE.Vector3(0, 0, 1));
+            cuadranteAbajo = true;
+            direccionesRender[2] = 1;
+               //Abajo
+           }else{
+            console.log("Izquierda");
+            direccionesJugador2.push(new THREE.Vector3(0, 0, 1));
+                    if (inicio) {
+                        direccionesRender[0] = 1;
+                    } else {
+                        inicio = false
+                        if (cuadranteAbajo) {
+                            cuadranteAbajoIzq = true;
+                            cuadranteArribaDer = false;
+                            direccionesRender[0] = 1;
+                        } else {
+                            cuadranteAbajoIzq = false;
+                            cuadranteArribaDer = false;
+                            direccionesRender[0] = 1;
+                        }
+                    }
+               //Izquierda
+           }
+        }
+
+        setInterval(direccion, 2000);
+
 
         var renderers = [];
         var cameras = [];
